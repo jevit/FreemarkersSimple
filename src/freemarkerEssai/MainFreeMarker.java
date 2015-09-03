@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,16 +34,23 @@ public class MainFreeMarker {
 			cfg.setObjectWrapper(new DefaultObjectWrapper());
 			/* Get or create a template */List<Person> userList = new ArrayList<Person>();
 
-			Person tom = new Person("Tom", 19, 1);
-			Person amy = new Person("Amy", 28, 0);
-			Person leo = new Person("Leo", 23, 1);
-
+			Person tom = new Person("MY", "Tom", 19, 1);
+			Person amy = new Person("RH", "Amy", 28, 0);
+			Person leo = new Person("GRO", "Leo", 23, 1);
+			leo.setRepas(1);
+			amy.setH1(1);
+			amy.setH2(1);
+			leo.setH11(1);
+			leo.setH12(1);
+			leo.setH13(1);
+			leo.setDureePresence("03:00");
 			userList.add(tom);
 			userList.add(amy);
 			userList.add(leo);
 
 			Map<String, Object> variables = new HashMap<String, Object>();
-			variables.put("title", "User List");
+			SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd MMMM YYYY");
+			variables.put("title", "Pointages journaliers horaires du mercredi " + sdf.format(new Date()));
 			variables.put("userList", userList);
 			Template tp = cfg.getTemplate("template/planning.ftl");
 			StringWriter stringWriter = new StringWriter();

@@ -2,9 +2,11 @@ package freemarkerEssai;
 
 public class Person {
 	private String name;
+	private String prenom;
 	private int age;
 	private int sex;
 	private int repas;
+	private String horaire = "17:00 à 18:20; 19:00 à 19:20";
 	private int h1;
 	private int h2;
 	private int h3;
@@ -28,6 +30,15 @@ public class Person {
 	private int h21;
 	private int h22;
 	private int h23;
+	private String dureePresence = "";
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
 
 	public int getRepas() {
 		return repas;
@@ -228,8 +239,9 @@ public class Person {
 	 * @param age
 	 * @param sex
 	 */
-	public Person(String name, int age, int sex) {
+	public Person(String prenom, String name, int age, int sex) {
 		super();
+		this.prenom = prenom;
 		this.name = name;
 		this.age = age;
 		this.sex = sex;
@@ -261,4 +273,21 @@ public class Person {
 	public void setSex(int sex) {
 		this.sex = sex;
 	}
+
+	public String getHoraire() {
+		return horaire;
+	}
+
+	public void setHoraire(String horaire) {
+		this.horaire = horaire;
+	}
+
+	public String getDureePresence() {
+		return dureePresence;
+	}
+
+	public void setDureePresence(String dureePresence) {
+		this.dureePresence = dureePresence;
+	}
+
 }

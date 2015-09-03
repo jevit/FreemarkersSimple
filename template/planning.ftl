@@ -3,61 +3,90 @@
 <html>
 <head>
   <title>${title}</title>
-  <style>@page land { size:landscape; }
-.landscapePage { page:land; }
+  <style>@page land { size:landscape;width:100%; }
+.landscapePage { page:land; width:100%;}
 
 .table
 {
 border-collapse:collapse;
 width:100%;
-max-width:700px;
-min-width:400px;
 text-align:center;
 }
-.table
+table
 {
-border-collapse:collapse;
-}
-caption
-{
-caption-side:bottom;
-font-weight:bold;
-font-style:italic;
-margin:4px;
+	border-collapse:collapse;
+	font-size:8px;
 }
 
-.border
-{
-border: 1px solid gray;
-}
 
 th,td
 {
-height: 24px;
-padding:4px;
-vertical-align:middle;
+	min-height: 18px;
+  	min-width:16px;
+	max-height: 18px;
+  	max-width: 16px;
 }
+
 .repas
 {
-background-image:url(toque.png);
+	background-image:url(toque.png); 
 }
-th
-{
-background-image:url(table-shaded.png);
-}
+
 .left{
     float:left;
-}.right{
+}
+
+.right{
     position: absolute;
     right: 5px;
 }
+
 .rowtitle
 {
-background: #9CF;
-font-weight:bold;
-}.tableaux{
- 
+	background: #9CF;
+	font-weight:bold;
+}
+
+.tableaux{
    display: inline;
+}
+
+.colonneHeader1{
+	color:black;
+	background-color:#95B3D7;
+	vertical-align:middle;
+	border: 0.2px solid #969696;
+	text-align: center;
+}
+.ligneHeader1{
+	color:black;
+	background-color:#ecf1f8;
+  	min-width: 120px;
+  	max-width: 120px;
+	border: 0.2px solid #969696;
+	line-height: 80%;
+	text-align:left;
+}
+.colonneDetail{
+	color:black;
+	vertical-align:middle;
+	border: 0.2px solid #969696;
+	text-align: center;
+}
+
+.colonneDetailRempli{
+	background-color:#f466ff;
+	color:black;
+	border-left:none;
+	border-right:none;
+	text-align: center;
+	vertical-align:middle;
+}
+
+.colonneDetailNoBorderLeft{
+	border-left:none;
+	border-right:none;
+	vertical-align:middle;
 }
   </style>
 </head>
@@ -65,73 +94,164 @@ font-weight:bold;
 <div >
   <div class="landscapePage">
       <div align="center">
-	      <h1>${title}</h1>
+	      <h2>${title}</h2>
 	  </div>
-	  	<table>
+	  	<table >
 	     <tr>
-	        <td><b>Nom</b></td>
-	        <td><b>Age</b></td>
-	        <td><b>Sexe</b></td>
-	        <td><b>Repas</b></td>
-	        <td><b>1h</b></td>
-	        <td><b>2h</b></td>
-	        <td><b>3h</b></td>
-	        <td><b>4h</b></td>
-	        <td><b>5h</b></td>
-	        <td><b>6h</b></td>
-	        <td><b>7h</b></td>
-	        <td><b>8h</b></td>
-	        <td><b>9h</b></td>
-	        <td><b>10h</b></td>
-	        <td><b>11h</b></td>
-	        <td><b>12h</b></td>
-	        <td><b>13h</b></td>
-	        <td><b>14h</b></td>
-	        <td><b>15h</b></td>
-	        <td><b>16h</b></td>
-	        <td><b>17h</b></td>
-	        <td><b>18h</b></td>
-	        <td><b>19h</b></td>
-	        <td><b>20h</b></td>
-	        <td><b>21h</b></td>
-	        <td><b>22h</b></td>
-	        <td><b>23h</b></td>
+	        <td ></td>
+	        <td class="colonneHeader1"><b>Repas</b></td>
+	        <td class="colonneHeader1"><b>1h</b></td>
+	        <td class="colonneHeader1"><b>2h</b></td>
+	        <td class="colonneHeader1"><b>3h</b></td>
+	        <td class="colonneHeader1"><b>4h</b></td>
+	        <td class="colonneHeader1"><b>5h</b></td>
+	        <td class="colonneHeader1"><b>6h</b></td>
+	        <td class="colonneHeader1"><b>7h</b></td>
+	        <td class="colonneHeader1"><b>8h</b></td>
+	        <td class="colonneHeader1"><b>9h</b></td>
+	        <td class="colonneHeader1"><b>10h</b></td>
+	        <td class="colonneHeader1"><b>11h</b></td>
+	        <td class="colonneHeader1"><b>12h</b></td>
+	        <td class="colonneHeader1"><b>13h</b></td>
+	        <td class="colonneHeader1"><b>14h</b></td>
+	        <td class="colonneHeader1"><b>15h</b></td>
+	        <td class="colonneHeader1"><b>16h</b></td>
+	        <td class="colonneHeader1"><b>17h</b></td>
+	        <td class="colonneHeader1"><b>18h</b></td>
+	        <td class="colonneHeader1"><b>19h</b></td>
+	        <td class="colonneHeader1"><b>20h</b></td>
+	        <td class="colonneHeader1"><b>21h</b></td>
+	        <td class="colonneHeader1"><b>22h</b></td>
+	        <td class="colonneHeader1"><b>23h</b></td>
+	        <td class="colonneHeader1">Durée présence</td>
 	     </tr>
 	     <#list userList as user>
 	        <tr>
-		        <td>${user.name}</td>
-		        <td>${user.age}</td>
-		        <td>
-		           <#if user.sex = 1>
-		             	 male
+		        <td class="ligneHeader1">
+		        	<b> ${user.prenom} ${user.name}  </b> 	<br/>
+		        	<div style="font-size:6px !important;line-height: 100%;">${user.age} ans	</div >
+		        	<div style="font-size:4px !important;line-height: 100%;">${user.horaire}	</div >
+		        </td>
+		        <td class="colonneDetail">
+		        	<#if user.repas = 1>
+		             	<img src="toque.png" height="18" width="16"/>
 		           <#else>
-		              	 female
+		              	 <!-- nothing -->
 		           </#if>
 		        </td>
-		        <td><div class="repas"></div></td>
-		        <td><b>${user.h1}</b></td>
-		        <td><b>${user.h2}</b></td>
-		        <td><b>${user.h3}</b></td>
-		        <td><b>${user.h4}</b></td>
-		        <td><b>${user.h5}</b></td>
-		        <td><b>${user.h6}</b></td>
-		        <td><b>${user.h7}</b></td>
-		        <td><b>${user.h8}</b></td>
-		        <td><b>${user.h9}</b></td>
-		        <td><b>${user.h10}</b></td>
-		        <td><b>${user.h11}</b></td>
-		        <td><b>${user.h12}</b></td>
-		        <td><b>${user.h13}</b></td>
-		        <td><b>${user.h14}</b></td>
-		        <td><b>${user.h15}</b></td>
-		        <td><b>${user.h16}</b></td>
-		        <td><b>${user.h17}</b></td>
-		        <td><b>${user.h18}</b></td>
-		        <td><b>${user.h19}</b></td>
-		        <td><b>${user.h20}</b></td>
-		        <td><b>${user.h21}</b></td>
-		        <td><b>${user.h22}</b></td>
-		        <td><b>${user.h23}</b></td>
+		        <#if user.h1 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h2 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h3 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h4 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if><#if user.h5 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		        <#if user.h6 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if><#if user.h7 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if><#if user.h8 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		        <#if user.h9 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		        <#if user.h10 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		        <#if user.h11 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h12 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h13 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h14 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h15 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h16 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h17 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h18 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h19 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h20 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h21 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h22 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+		         <#if user.h23 = 1>
+			       	<td class="colonneDetailRempli"></td>
+		        <#else>
+			       	<td class="colonneDetail"></td>	
+		        </#if>
+			    <td class="colonneDetail">${user.dureePresence}</td>
 	        </tr>
 	     </#list>
 	  	</table>
