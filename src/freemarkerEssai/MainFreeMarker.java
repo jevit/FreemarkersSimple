@@ -43,14 +43,14 @@ public class MainFreeMarker {
 			Map<String, Object> variables = new HashMap<String, Object>();
 			variables.put("title", "User List");
 			variables.put("userList", userList);
-			Template tp = cfg.getTemplate("test.ftl");
+			Template tp = cfg.getTemplate("template/planning.ftl");
 			StringWriter stringWriter = new StringWriter();
 			BufferedWriter writer = new BufferedWriter(stringWriter);
 			tp.setEncoding("UTF-8");
 			tp.process(variables, writer);
 			String htmlStr = stringWriter.toString();
 			writer.flush();
-			String outputFile = "sample.pdf";
+			String outputFile = "out/planning.pdf";
 			writer.close();
 			OutputStream out = new FileOutputStream(outputFile);
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
