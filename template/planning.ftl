@@ -37,7 +37,10 @@ height: 24px;
 padding:4px;
 vertical-align:middle;
 }
-
+.repas
+{
+background-image:url(toque.png);
+}
 th
 {
 background-image:url(table-shaded.png);
@@ -105,7 +108,7 @@ font-weight:bold;
 		              	 female
 		           </#if>
 		        </td>
-		        <td><b>${user.repas}</b></td>
+		        <td><div class="repas"></div></td>
 		        <td><b>${user.h1}</b></td>
 		        <td><b>${user.h2}</b></td>
 		        <td><b>${user.h3}</b></td>
