@@ -90,9 +90,7 @@ th,td
 }
   </style>
 </head>
-<body>
-<div >
-  <div class="landscapePage">
+<body class="landscapePage">
       <div align="center">
 	      <h2>${title}</h2>
 	  </div>
@@ -256,7 +254,5 @@ th,td
 	     </#list>
 	  	</table>
 	  
-  </div>
-  </div>
 </body>
 </html> 
