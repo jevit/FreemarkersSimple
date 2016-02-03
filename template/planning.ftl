@@ -8,19 +8,19 @@
 .landscapePage { page:land; width:1000px;}
 table
 {
-	border-collapse:collapse;
+	border-collapse:collapse;border-spacing:0px
 	font-size:8px;
 	width:100%;
+	font-size:12px;
 	text-align:center;
 }
 
-
-th,td
+th,td,tr
 {
 	min-height: 18px;
-  	min-width:16px;
+  	min-width:6px;
 	max-height: 18px;
-  	max-width: 16px;
+  	max-width: 6px;
 }
 
 .repas
@@ -53,6 +53,7 @@ th,td
 	vertical-align:middle;
 	border: 0.2px solid #969696;
 	text-align: center;
+	font-size:8px;
 }
 .ligneHeader1{
 	color:black;
@@ -62,6 +63,7 @@ th,td
 	border: 0.2px solid #969696;
 	line-height: 80%;
 	text-align:left;
+	font-size:8px;
 }
 .colonneDetail{
 	color:black;
@@ -86,6 +88,11 @@ th,td
 	border-right:none;
 	vertical-align:middle;
 }
+.divRempli{
+	background-color:#f466ff;
+	height:8px;
+	width:100%;
+}
   </style>
 </head>
 <body class="landscapePage">
@@ -93,7 +100,7 @@ th,td
       <div align="center">
 	      <h2>${table.title}</h2>
 	  </div>
-	  <table >
+	  <table cellpadding="0px">
 	  	<tr>
 	   		<!-- en-tête avec les noms des individus -->
 	    	<td ></td> 
@@ -122,7 +129,7 @@ th,td
 					</td>
 				<#elseif column.type = 1>
 				  	<#if column.value = "1">
-					  	<td class="colonneDetailRempli"></td>	
+					  	<td class="colonneDetail"><div class="divRempli"></div></td>	
 					<#else>
 						<td class="colonneDetail"></td>
 					</#if>

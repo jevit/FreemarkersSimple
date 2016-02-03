@@ -1,5 +1,6 @@
 package freemarker;
 
+import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -29,11 +30,15 @@ import freemarkers.document.RowData;
 import freemarkers.document.Table;
 import freemarkers.model.Horaire;
 import freemarkers.model.Individu;
-
+/**
+ * 
+ * @author jerem
+ *
+ */
 public class MainFreeMarker {
 
-	final private static String fileTemplate = "template/planning.ftl";
-	final private static String fileOutput = "out/planning.pdf";
+	final private static String FILE_TEMPLATE = "template/planning.ftl";
+	final private static String FILE_OUTPUT = "out/planning.pdf";
 	final private static int nbHoraire = 24;// par heure
 
 	public static void main(String[] args) {
@@ -54,14 +59,14 @@ public class MainFreeMarker {
 			variables.put("table", table);
 
 			// Build HTML
-			Template tp = cfg.getTemplate(fileTemplate);
+			Template tp = cfg.getTemplate(FILE_TEMPLATE);
 			StringWriter stringWriter = new StringWriter();
 			BufferedWriter writer = new BufferedWriter(stringWriter);
 			tp.setEncoding("UTF-8");
 			tp.process(variables, writer);
 			String htmlStr = stringWriter.toString();
 			writer.flush();
-			String outputFile = fileOutput;
+			String outputFile = FILE_OUTPUT;
 			writer.close();
 			OutputStream out = new FileOutputStream(outputFile);
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -73,11 +78,20 @@ public class MainFreeMarker {
 			renderer.layout();
 			renderer.createPDF(out);
 			out.close();
+			
+			/* Launch preview PDF */
+			Desktop desk = Desktop.getDesktop();
+			desk.open( new File(FILE_OUTPUT));
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
 	}
 
+	/**
+	 * Construite de l'entete du document
+	 * @param individus
+	 * @return
+	 */
 	private static Table buildHeader(List<Individu> individus) {
 		Table header = new Table();
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd MMMM YYYY");
@@ -89,6 +103,10 @@ public class MainFreeMarker {
 		return header;
 	}
 
+	/**
+	 * Construction de l'entete des colonnes
+	 * @return
+	 */
 	private static List<ColumnHeader> buildColumnHeaders() {
 		List<ColumnHeader> headerColumns = new ArrayList<ColumnHeader>();
 		int i = 0;
@@ -104,6 +122,12 @@ public class MainFreeMarker {
 		return headerColumns;
 	}
 
+	/**
+	 * Construction des colonnes
+	 * @param columnHeaders
+	 * @param individu
+	 * @return
+	 */
 	private static List<ColumnData> buildColumnDatas(List<ColumnHeader> columnHeaders, Individu individu) {
 		List<ColumnData> columnDatas = new ArrayList<>();
 		Map<String, String> mapData = buildMapData(individu, individu.getHoraires());
@@ -117,6 +141,12 @@ public class MainFreeMarker {
 		return columnDatas;
 	}
 
+	/**
+	 * Construction des lignes
+	 * @param columnHeaders
+	 * @param individus
+	 * @return
+	 */
 	private static List<RowData> buildRowDatas(List<ColumnHeader> columnHeaders, List<Individu> individus) {
 		List<RowData> rowDatas = new ArrayList<>();
 		for (Individu individu : individus) {
@@ -128,6 +158,25 @@ public class MainFreeMarker {
 		return rowDatas;
 	}
 
+	private static Map<String, String> buildMapData(Individu individu, List<Horaire> horaires) {
+		Map<String, String> mapData = new HashMap<>();
+		mapData.put(EnumDataField.REPAS.getText(), String.valueOf(individu.getRepas()));
+		for (Horaire horaire : horaires) {
+			String isPresent = String.valueOf(horaire.getIsPresent());
+			mapData.put(utilKeyHoraire(horaire.getNumero()), isPresent);
+		}
+		mapData.put(EnumDataField.DUREE.getText(), String.valueOf(individu.getDureePresence()));
+		return mapData;
+	}
+	
+	/*
+	 * |Individu| 1 ---- * |Horaire|
+	 */
+	
+	/**
+	 * Modele de données Individu
+	 * @return
+	 */
 	private static List<Individu> buildIndividus() {
 		List<Individu> userList = new ArrayList<Individu>();
 		List<Horaire> horairesLeo = buildHoraires();
@@ -143,17 +192,10 @@ public class MainFreeMarker {
 		return userList;
 	}
 
-	private static Map<String, String> buildMapData(Individu individu, List<Horaire> horaires) {
-		Map<String, String> mapData = new HashMap<>();
-		mapData.put(EnumDataField.REPAS.getText(), String.valueOf(individu.getRepas()));
-		for (Horaire horaire : horaires) {
-			String isPresent = String.valueOf(horaire.getIsPresent());
-			mapData.put(utilKeyHoraire(horaire.getNumero()), isPresent);
-		}
-		mapData.put(EnumDataField.DUREE.getText(), String.valueOf(individu.getDureePresence()));
-		return mapData;
-	}
-
+	/**
+	 * Modele de données Horaire
+	 * @return
+	 */
 	private static List<Horaire> buildHoraires() {
 		List<Horaire> horaires = new ArrayList<>();
 		for (int i = 0; i <= nbHoraire; i++) {
