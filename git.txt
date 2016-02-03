@@ -3,7 +3,6 @@ git pull master
 git push master
 
 
-
 …or create a new repository on the command line
 
 
