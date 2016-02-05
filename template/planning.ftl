@@ -17,10 +17,11 @@ table
 
 th,td,tr
 {
-	min-height: 18px;
-  	min-width:6px;
-	max-height: 18px;
-  	max-width: 6px;
+	min-height: 20px;
+  	min-width:10px;
+	max-height: 20px;
+  	max-width: 10px;
+  	text-align:justify;
 }
 
 .repas
@@ -55,6 +56,15 @@ th,td,tr
 	text-align: center;
 	font-size:8px;
 }
+.colonneHeader2{
+	color:black;
+	background-color:#95B3D7;
+	vertical-align:middle;
+	border: 0px solid #969696;
+	border-top: 0.2px solid #969696;
+	text-align: left;
+	font-size:8px;
+}
 .ligneHeader1{
 	color:black;
 	background-color:#ecf1f8;
@@ -75,8 +85,8 @@ th,td,tr
 .colonneDetailRempli{
 	background-color:#f466ff;
 	color:black;
-	border-left:none;
-	border-right:none;
+	border-left:0.2px solid #969696;
+	border-right:0.2px solid #969696;
 	border-top: 0.2px solid #969696;
 	border-bottom: 0.2px solid #969696;
 	text-align: center;
@@ -105,11 +115,24 @@ th,td,tr
 	   		<!-- en-tête avec les noms des individus -->
 	    	<td ></td> 
 		    <!-- en-tête des colonnes -->
-		    <#list table.headerColumns as header>
-				<#if header.show = 1>
-		       		<td class="colonneHeader1"> <b>${header.name}</b> </td>
-				</#if>
-		    </#list>
+			<#list table.headerColumns as header>
+					<#if header.show = 1>
+		    			<!-- en-tête repas -->
+						<#if header.type = 0>
+			       			<td class="colonneHeader1" > <b>${header.name}</b> </td>
+						</#if>
+		    			<!-- en-tête des horaires -->
+						<#if header.type = 1>
+			  	  			<td class="colonneHeader2"  > 
+								<#if header.name != "0" > <b>${header.name}</b> </#if>
+			    			</td>
+						</#if>
+		    			<!-- en-tête cumul heures -->
+						<#if header.type = 2>
+		       				<td class="colonneHeader1" > <b>${header.name}</b> </td>
+						</#if>
+					</#if>
+			</#list> 
 	    </tr>
 		<#list table.rowDatas as row>
 	    <tr>
@@ -122,7 +145,7 @@ th,td,tr
 				<#if column.type = 0>
 					<td class="colonneDetail">
 					    <#if row.individu.repas = 1>
-						   		<img src="toque.png" height="18" width="16"/>
+						   		<img src="toque.png" height="16" width="14"/>
 					    <#else>
 					       <!-- nothing -->
 					    </#if>

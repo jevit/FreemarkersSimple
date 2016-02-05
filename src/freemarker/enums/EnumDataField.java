@@ -1,7 +1,7 @@
 package freemarker.enums;
 
 public enum EnumDataField {
-	REPAS("REPAS", "Repas"), HORAIRE("HORAIRE", "h"), DUREE("DUREE", "Durée présence");
+	REPAS("REPAS", "Repas"), HORAIRE("HORAIRE", ""), DUREE("DUREE", "Durée présence");
 
 	private String value;
 	private String text;
